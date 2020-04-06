@@ -1,4 +1,3 @@
-
 #Libraries Needed
 import pandas as pd
 import seaborn as sns
@@ -49,3 +48,22 @@ table.add_row(["","Total",
                sum(state_data['Recovered']), 
                sum(state_data['Deceased'])])
 print(table)
+
+
+#Creating a bargraph to represent the number of cases in each state
+sns.set_style("ticks")
+plt.figure(figsize = (15,10))
+plt.barh(state_data["States/UT"], state_data["Confirmed"].map(int),
+         align = 'center', color = 'lightblue', edgecolor = 'blue')
+plt.xlabel('No. of Confirmed cases', fontsize = 18)
+plt.ylabel('States/UT', fontsize = 18)
+#This mantains the order of the states apearence
+plt.gca().invert_yaxis() 
+plt.xticks(fontsize = 14) 
+plt.yticks(fontsize = 14)
+plt.title('Total Confirmed Cases Statewise', fontsize = 20)
+
+for index, value in enumerate(state_data["Confirmed"]):
+    plt.text(value, index, str(value), fontsize = 12, verticalalignment = 'center')
+plt.show()  
+
