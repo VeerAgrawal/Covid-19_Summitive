@@ -49,7 +49,6 @@ table.add_row(["","Total",
                sum(state_data['Deceased'])])
 print(table)
 
-
 #Creating a bargraph to represent the number of cases in each state
 sns.set_style("ticks")
 plt.figure(figsize = (15,10))
@@ -66,4 +65,23 @@ plt.title('Total Confirmed Cases Statewise', fontsize = 20)
 for index, value in enumerate(state_data["Confirmed"]):
     plt.text(value, index, str(value), fontsize = 12, verticalalignment = 'center')
 plt.show()  
+
+#Creating a Piechart that represents the data in India
+group_size = [sum(state_data['Confirmed']), 
+              sum(state_data['Recovered']), 
+              sum(state_data['Deceased'])]
+
+group_labels = ['Confirmed\n' + str(sum(state_data['Confirmed'])), 
+                'Recovered\n' + str(sum(state_data['Recovered'])), 
+                'Deceased\n'  + str(sum(state_data['Deceased']))]
+custom_colors = ['skyblue','yellowgreen','tomato']
+
+plt.figure(figsize = (7,7))
+plt.pie(group_size, labels = group_labels, colors = custom_colors)
+central_circle = plt.Circle((0,0), 0.5, color = 'white')
+fig = plt.gcf()
+fig.gca().add_artist(central_circle)
+plt.rc('font', size = 12) 
+plt.title('Nationwide total Confirmed, Recovered and Deceased Cases', fontsize = 16)
+plt.show()
 
